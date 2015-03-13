@@ -1,0 +1,23 @@
+#!/usr/bin/make -f
+
+DEB_VERSION:=$(shell dpkg-parsechangelog -n1 | sed -n '/^Version: /s///p')
+DEB_UPSTREAM_VERSION:=$(shell DEB_VERSION=${DEB_VERSION}; echo $${DEB_VERSION%-*})
+DEB_UPSTREAM_VERSION:=$(shell DEB_UPSTREAM_VERSION=${DEB_UPSTREAM_VERSION}; echo $${DEB_UPSTREAM_VERSION\#*:})
+DEB_MASTER_VERSION:=$(shell DEB_UPSTREAM_VERSION=${DEB_UPSTREAM_VERSION}; echo "v"$${DEB_UPSTREAM_VERSION\#*+tar})
+
+%:
+	dh $@ --with python2 --buildsystem=python_distutils
+
+override_dh_clean:
+	dh_clean
+	rm -rf praw.egg-info src/praw.egg-info
+
+get-orig-source:
+	rm -rf debian/tmp; mkdir debian/tmp
+	uscan --noconf --verbose --rename --destdir=debian/tmp --check-dirname-level=0 --force-download --download-version ${DEB_MASTER_VERSION}
+	cd debian/tmp; tar xvzf python-praw_${DEB_MASTER_VERSION}.orig.tar.gz
+	cd debian/tmp; mv praw-* python-praw-${DEB_UPSTREAM_VERSION}
+	cd debian/tmp; tar cvJf python-praw_${DEB_UPSTREAM_VERSION}.orig.tar.xz python-praw-${DEB_UPSTREAM_VERSION}
+	mv debian/tmp/python-praw_${DEB_UPSTREAM_VERSION}.orig.tar.xz .
+	mv debian/tmp/python-praw-${DEB_UPSTREAM_VERSION} .
+	rm -rf debian/tmp

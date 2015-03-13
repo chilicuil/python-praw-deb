@@ -1,0 +1,5 @@
+python-praw (1:201406210506+tar2.1.17-minos) precise; urgency=low
+
+  * Initial release, closes: #728946.
+
+ -- Javier P.L. <chilicuil@ubuntu.com>  Thu, 07 Nov 2013 04:28:13 +0000

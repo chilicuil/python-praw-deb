@@ -1,0 +1,20 @@
+Debian packaging for python-praw
+--------------------------------
+
+Steps to build this package:
+
+```
+$ git clone --dept=1 https://github.com/chilicuil/python-praw-deb
+$ cd python-praw-deb
+$ dch -i #insert proper upstream version (1:$(date +%Y%m%d%H%M)+git7digitsHash-minos)
+$ debian/rules get-orig-source
+$ mv debian python-praw-*
+$ cd python-praw-*
+
+[ Optional, make some adaptations, like updating debian/patches, if needed ]
+[ document additional changes if required, $EDITOR debian/changelog ]
+
+$ debuild -S
+
+[ Build .dsc (pbuilder) || Upload .changes file (dput) ]
+```
