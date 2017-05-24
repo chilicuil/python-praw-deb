@@ -4,7 +4,7 @@ Debian packaging for python-praw
 Steps to build this package:
 
 ```
-$ git clone --dept=1 https://github.com/chilicuil/python-praw-deb
+$ git clone --dept=1 https://github.com/javier-lopez/python-praw-deb
 $ cd python-praw-deb
 $ dch -i #insert proper upstream version (1:$(date +%Y%m%d%H%M)+git7digitsHash-minos)
 $ debian/rules get-orig-source

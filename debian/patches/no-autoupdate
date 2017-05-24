@@ -2,7 +2,7 @@ Description: Remove update_checker dependency by removing autoupdate
  python-praw is a dependency of alienfeed and probably others, avoid
  autoupdating this library and breaking possibly other applications who
  depend on an specific version.
-Author: Javier P.L. <chilicuil@ubuntu.com>
+Author: Javier López <javier-lopez@ubuntu.com>
 --- python-praw_201406210506+tar2.1.17.orig/setup.py
 +++ python-praw_201406210506+tar2.1.17/setup.py
 @@ -44,7 +44,7 @@ setup(
